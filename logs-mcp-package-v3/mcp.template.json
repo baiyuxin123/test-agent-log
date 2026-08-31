@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dsers-logs": {
+      "command": "/ABSOLUTE/PATH/TO/logs-mcp-package-v3/run-dsers-logs-mcp",
+      "args": []
+    }
+  }
+}

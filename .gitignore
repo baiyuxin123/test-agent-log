@@ -1,0 +1,14 @@
+.env
+.DS_Store
+**/.DS_Store
+.venv/
+__pycache__/
+*.pyc
+node_modules
+bin/
+/logs-mcp
+.tools/
+outputs/
+*.zip
+logs-mcp-package-v2/
+logs-mcp-package-v3/bin/

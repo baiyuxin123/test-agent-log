@@ -1,0 +1,4 @@
+interface:
+  display_name: "Logs"
+  short_description: "Query DSers, DianShi, and Shopify order logs"
+  default_prompt: "Use $logs to query an order status, platform mapping, supplier side, and item states from SLS logs."

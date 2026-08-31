@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+DIR=$(cd "$(dirname "$0")" && pwd)
+KEY_URL=${ALIYUN_KEY_URL:-https://super-app-api-gw-test.dsers.com/dsers-logistics-mgmt-bff/main/aliyun-key}
+KEY_CACHE_TTL=${ALIYUN_KEY_CACHE_TTL:-1h}
+
+exec "$DIR/bin/logs-mcp" --key-url "$KEY_URL" --key-cache-ttl "$KEY_CACHE_TTL"
