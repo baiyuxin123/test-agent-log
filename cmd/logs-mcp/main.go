@@ -22,7 +22,7 @@ import (
 
 const (
 	serverName    = "dsers-logs-mcp"
-	serverVersion = "0.2.0"
+	serverVersion = "0.3.0"
 
 	projectDSers    = "k8s-log-cc338bd1e67fa4d8e9be4ad1e9435670a"
 	projectDianShi  = "k8s-log-c19589a718db24dbb835525e4e8f2c2a0"
@@ -430,6 +430,8 @@ func (s *mcpServer) callTool(ctx context.Context, params json.RawMessage) (any, 
 	}
 
 	switch call.Name {
+	case "sls_query_all", "order_price_history", "order_price_audit", "order_context", "resolve_user_emails":
+		return s.callBusinessTool(ctx, call.Name, call.Arguments)
 	case "sls_query":
 		var args slsQueryArgs
 		if err := json.Unmarshal(call.Arguments, &args); err != nil {
@@ -516,7 +518,7 @@ func toolError(err error) map[string]any {
 }
 
 func listTools() []map[string]any {
-	return []map[string]any{
+	return append([]map[string]any{
 		{
 			"name":        "sls_query",
 			"description": "Run a narrow Alibaba Cloud SLS query. It classifies raw, SQL/SPL analysis, and trace queries and returns an execution receipt.",
@@ -607,11 +609,12 @@ func listTools() []map[string]any {
 				},
 			},
 		},
-	}
+	}, businessToolDefinitions()...)
 }
 
 func listResources() []map[string]any {
 	return []map[string]any{
+		{"uri": "logs://price-audit-rules", "name": "Price audit evidence rules", "description": "Price stages, completeness and attribution contract.", "mimeType": "text/markdown"},
 		{
 			"uri":         "logs://rules",
 			"name":        "DSers log query rules",
@@ -636,6 +639,8 @@ func readResource(params json.RawMessage) (any, error) {
 	}
 	var text string
 	switch req.URI {
+	case "logs://price-audit-rules":
+		text = priceAuditRules
 	case "logs://rules":
 		text = logsRules
 	case "logs://order-fields":

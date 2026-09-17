@@ -173,3 +173,13 @@ The MCP server also exposes `logs://rules` and `logs://order-fields` resources s
 ## AoFei Notes
 
 AoFei-only lookup conventions and verified query examples are recorded in [aofei-log-notes.md](aofei-log-notes.md).
+
+## Analysis tools (0.3.0)
+
+Five read-only tools now extend the original MCP: `sls_query_all`,
+`order_price_history`, `order_price_audit`, `order_context`, and
+`resolve_user_emails`. Read `logs://price-audit-rules` before interpreting price
+results. See [arguments, examples, evidence limitations and verification](docs/mcp-analysis.md).
+
+Rebuild `bin/logs-mcp` and restart the client MCP connection to load the new tools.
+Historical v2/v3 bundles and the daily-report script are unchanged.

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -68,11 +69,11 @@ func TestGetSLSKeyConfigCachesFetchedConfigInMemory(t *testing.T) {
 		httpClient:  api.Client(),
 	}
 
-	first, err := server.getSLSKeyConfig(t.Context())
+	first, err := server.getSLSKeyConfig(context.Background())
 	if err != nil {
 		t.Fatalf("first getSLSKeyConfig returned error: %v", err)
 	}
-	second, err := server.getSLSKeyConfig(t.Context())
+	second, err := server.getSLSKeyConfig(context.Background())
 	if err != nil {
 		t.Fatalf("second getSLSKeyConfig returned error: %v", err)
 	}
